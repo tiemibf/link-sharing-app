@@ -1,4 +1,4 @@
-import { style } from "@vanilla-extract/css";
+import { globalStyle, style } from "@vanilla-extract/css";
 import { vars } from "../../styles/theme.css";
 
 export const tabItem = style({
@@ -14,6 +14,7 @@ export const tabItem = style({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: vars.spacing.small,
     selectors: {
         '&:svg': {
             fill: vars.color.purple
@@ -26,6 +27,14 @@ export const tabItem = style({
             color: vars.color.purple,
         }
     }
+})
+
+globalStyle(`${tabItem}[data-state="active"] > div > div > svg > path`, {
+    fill: vars.color.purple,
+})
+
+globalStyle(`${tabItem}:hover > div > div > svg > path`, {
+    fill: vars.color.purple,
 })
 
 export const tabList = style({ display: 'flex' })
