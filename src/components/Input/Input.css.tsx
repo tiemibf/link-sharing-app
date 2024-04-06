@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "../../styles/theme.css";
 
-export const inputWrapper = style({
+export const inputWrapperStyle = style({
     display: "flex",
     alignItems: "center",
     border: `2px solid ${vars.color.borders}`,
@@ -17,7 +17,7 @@ export const inputWrapper = style({
     }
 })
 
-export const input = style({
+export const inputStyle = style({
     width: "100%",
     height: vars.spacing.xlarge,
     padding: "0",
@@ -28,18 +28,18 @@ export const input = style({
     },
     "::placeholder": { color: vars.color.gray },
     selectors: {
-        [`${inputWrapper}[data-invalid=true] &::placeholder`]: {
+        [`${inputWrapperStyle}[data-invalid=true] &::placeholder`]: {
             color: vars.color.red
         }
     },
     ...vars.typography.body.medium
 })
 
-export const inputIcon = style({
+export const inputIconStyle = style({
     marginRight: '12px'
 })
 
-export const error = style({
+export const errorStyle = style({
     ...vars.typography.body.small,
     color: vars.color.red,
     display: 'flex',
