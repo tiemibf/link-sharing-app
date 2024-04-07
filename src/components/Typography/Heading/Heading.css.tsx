@@ -2,12 +2,13 @@ import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { vars } from "../../../styles/theme.css";
 
-export const heading = recipe({
+export const getHeadingStyle = recipe({
     base: {
         lineHeight: "150%",
         fontFamily: vars.fontFamily.primary,
         fontWeight: vars.fontWeight.bold,
         color: vars.color.darkGray,
+        margin: 0
     },
     variants: {
         size: {

@@ -6,15 +6,20 @@ export const body = recipe({
         lineHeight: "150%",
         fontFamily: vars.fontFamily.primary,
         fontWeight: vars.fontWeight.regular,
-        color: vars.color.darkGray,
+        margin: 0
     },
     variants: {
         size: {
             small: { fontSize: "12px" },
             base: { fontSize: vars.spacing.base },
+        },
+        color: {
+            darkGray: { color: vars.color.darkGray },
+            gray: { color: vars.color.gray },
         }
     },
     defaultVariants: {
         size: "base",
+        color: "darkGray"
     }
 })
