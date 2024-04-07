@@ -1,7 +1,7 @@
 import { recipe } from "@vanilla-extract/recipes";
 import { vars } from "../../styles/theme.css";
 
-export const button = recipe({
+export const getButtonStyle = recipe({
     base: {
         height: '46px',
         width: '227px',
