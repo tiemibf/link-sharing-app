@@ -1,9 +1,11 @@
-import { style } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
 import { vars } from "../../styles/theme.css";
 
-export const card = style({
-    backgroundColor: vars.color.white,
-    borderRadius: vars.spacing.medium,
-    width: 'auto',
-    height: 'auto'
+export const getCardStyles = recipe({
+    base: {
+        backgroundColor: vars.color.white,
+        borderRadius: vars.spacing.medium,
+        width: 'auto',
+        height: 'auto'
+    }
 })
