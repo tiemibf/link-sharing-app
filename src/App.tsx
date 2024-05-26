@@ -1,11 +1,15 @@
-import { EditPage } from "./pages/EditPage/EditPage"
-import { ThemeProvider } from "./styles/ThemeProvider/ThemeProvider"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { EditPage } from "./pages/EditPage"
+import { ThemeProvider } from "./styles/ThemeProvider"
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
     <ThemeProvider>
-    <>Hello, world</>
+      <QueryClientProvider client={queryClient}>
         <EditPage />
+      </QueryClientProvider>
     </ThemeProvider>
   )
 }
