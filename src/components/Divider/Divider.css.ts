@@ -5,5 +5,4 @@ export const dividerStyle = style({
     height: 1,
     width: '100%',
     backgroundColor: vars.color.borders,
-    margin: '24px 0'
 })

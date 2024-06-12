@@ -6,7 +6,7 @@ export const getHeadingStyle = recipe({
     base: {
         lineHeight: "150%",
         fontFamily: vars.fontFamily.primary,
-        fontWeight: vars.fontWeight.bold,
+        fontWeight: vars.fontWeight.semibold,
         color: vars.color.darkGray,
         margin: 0
     },

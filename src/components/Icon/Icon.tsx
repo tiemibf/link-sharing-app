@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ReactSVG } from "react-svg";
 
 interface IconProps {
@@ -5,9 +6,9 @@ interface IconProps {
     className?: string;
 }
 
-const Icon = ({ name, className = "purpleIcon", ...props }: IconProps) => {
+const Icon = ({ name, className = "grayIcon", ...props }: IconProps) => {
     return (
-        <ReactSVG src={`src/assets/images/icon-${name}.svg`} className={`${className}`} {...props} />
+        <ReactSVG src={`src/assets/images/icon-${name}.svg`} className={clsx('icon', className)}{...props} />
     );
 };
 

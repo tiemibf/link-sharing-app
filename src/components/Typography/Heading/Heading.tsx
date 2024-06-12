@@ -5,13 +5,14 @@ import { getHeadingStyle } from './Heading.css';
 
 type HeadingProps = ComponentProps<'h1'> & {
     children: React.ReactNode;
+    variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     size?: "base" | "large";
     asChild?: boolean;
     className?: string;
 }
 
-export const Heading = ({ children, size, asChild = false, className, ...props }: HeadingProps) => {
-    const Component = asChild ? Slot : 'h1';
+export const Heading = ({ children, variant, size, asChild = false, className, ...props }: HeadingProps) => {
+    const Component = asChild ? Slot : variant;
     const styles = getHeadingStyle({ size })
 
     return (
