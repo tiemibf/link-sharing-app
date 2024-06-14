@@ -32,7 +32,7 @@ export const LinkItem = ({ index, removeItem }: LinkItemProps) => {
                     render={({ field }) => {
                         const { ref, fieldProps } = field;
                         return (
-                            <PlatformListSelect selectedPlatform={field.value} onValueChange={field.onChange} {...fieldProps} />)
+                            <PlatformListSelect value={field.value} onValueChange={field.onChange} {...fieldProps} />)
                     }}
                 />
             </div>

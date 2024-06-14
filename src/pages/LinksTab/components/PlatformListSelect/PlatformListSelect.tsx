@@ -4,26 +4,22 @@ import { Select } from "../../../../components/Select";
 import { platformsList } from "../../../../utils/platformsList";
 import { triggerValueStyle } from './PlatformListSelect.css';
 
-type PlatformListSelectProps = SelectProps & {
-    selectedPlatform?: string;
-}
+type PlatformListSelectProps = SelectProps;
 
-export const PlatformListSelect = ({ selectedPlatform, ...props }: PlatformListSelectProps) => {
+export const PlatformListSelect = ({ value, ...props }: PlatformListSelectProps) => {
     const renderValue = (value?: string) => {
         return (
             <div className={triggerValueStyle}>
                 <Icon name={platformsList.find(platform => platform.name === value)?.icon ?? 'link'} />
-                {value ?? 'Select a platform'}
+                {value}
             </div>
         )
     }
 
-    console.log(selectedPlatform)
-
     return (
-        <Select.Root  {...props}>
+        <Select.Root value={value} {...props}>
             <Select.Trigger placeholder="Select a platform" width="100%">
-                {renderValue(selectedPlatform)}
+                {renderValue(value)}
             </Select.Trigger>
             <Select.Content>
                 {platformsList.map((platform, index) => {
