@@ -1,4 +1,5 @@
 import { Controller, useFormContext } from "react-hook-form"
+import { IconLink } from "../../../../assets"
 import { Card } from "../../../../components/Card"
 import { Input } from "../../../../components/Input"
 import { TextButton } from "../../../../components/TextButton"
@@ -39,7 +40,7 @@ export const LinkItem = ({ index, removeItem }: LinkItemProps) => {
 
             <div>
                 <Typography.Body size="small">Link</Typography.Body>
-                <Input iconName='link' value={watch(`links.${index}.platformUrl`)} placeholder='e.g. https://www.github.com/johnappleseed' {...register(`links.${index}.platformUrl`)} />
+                <Input icon={IconLink} value={watch(`links.${index}.platformUrl`)} placeholder='e.g. https://www.github.com/johnappleseed' {...register(`links.${index}.platformUrl`)} />
             </div>
         </Card>
     )

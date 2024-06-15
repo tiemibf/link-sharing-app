@@ -1,4 +1,5 @@
 import { ReactSVG } from "react-svg"
+import { IconLink, IconProfileDetailsHeader } from "../../assets"
 import { Button } from "../../components/Button"
 import { Card } from "../../components/Card"
 import Icon from "../../components/Icon/Icon"
@@ -15,11 +16,11 @@ export const EditPage = () => {
                 <ReactSVG src={DEV_LINKS_LOGO} className={devLinksLogo} />
                 <Tab.List>
                     <Tab.Item value="links" className={tabItemStyle}>
-                        <Icon name='link' />
+                        <Icon icon={IconLink} />
                         Links
                     </Tab.Item>
                     <Tab.Item value="profileDetails" className={tabItemStyle} width="187px">
-                        <Icon name='profile-details-header' />
+                        <Icon icon={IconProfileDetailsHeader} />
                         Profile Details
                     </Tab.Item>
                 </Tab.List>

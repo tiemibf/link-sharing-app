@@ -4,17 +4,17 @@ import { errorStyle, inputIconStyle, inputStyle, inputWrapperStyle } from "./Inp
 
 
 type InputProps = ComponentProps<'input'> & {
-    iconName?: string;
+    icon?: React.FunctionComponent;
     hasError?: boolean;
     errorMessage?: string;
 }
 
-export const Input = React.forwardRef(({ iconName, hasError, errorMessage, ...props }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+export const Input = React.forwardRef(({ icon, hasError, errorMessage, ...props }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
     return (
         <div className={inputWrapperStyle} data-invalid={hasError}>
-            {iconName &&
+            {icon &&
                 <div className={inputIconStyle}>
-                    <Icon name={iconName} />
+                    <Icon icon={icon} />
                 </div>
             }
             <input type="text" className={inputStyle} ref={ref} {...props} />

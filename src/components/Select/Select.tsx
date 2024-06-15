@@ -1,6 +1,8 @@
 import * as Select from '@radix-ui/react-select';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import React from 'react';
+import { IconChevronDown } from '../../assets';
+import { vars } from '../../styles/theme.css';
 import Icon from '../Icon/Icon';
 import { selectContentStyle, selectOptionStyle, selectSeparatorStyle, selectTriggerStyle } from './Select.css';
 
@@ -29,7 +31,7 @@ export const Trigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>((
                 {children}
             </Select.Value>
             <Select.Icon>
-                <Icon name='chevron-down' className="purpleIcon" />
+                <Icon icon={IconChevronDown} color={vars.color.purple} />
             </Select.Icon>
         </Select.Trigger>
     )

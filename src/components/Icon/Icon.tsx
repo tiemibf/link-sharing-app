@@ -1,14 +1,20 @@
+import { assignInlineVars } from "@vanilla-extract/dynamic";
 import clsx from "clsx";
-import { ReactSVG } from "react-svg";
+import { ComponentProps } from "react";
+import { vars } from "../../styles/theme.css";
+import { iconStyle } from "./Icon.css";
 
-interface IconProps {
-    name: string;
-    className?: string;
+type IconProps = ComponentProps<'div'> & {
+    icon: React.FunctionComponent;
+    size?: string;
+    color?: string;
 }
 
-const Icon = ({ name, className = "grayIcon", ...props }: IconProps) => {
+const Icon = ({ icon: IconSvg, size = "16px", color = vars.color.gray, ...props }: IconProps) => {
     return (
-        <ReactSVG src={`src/assets/images/icon-${name}.svg`} className={clsx('icon', className)}{...props} />
+        <div className={clsx(iconStyle, props.className)} style={assignInlineVars({ fontSize: size, color })}  {...props}>
+            <IconSvg />
+        </div>
     );
 };
 
