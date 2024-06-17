@@ -1,25 +1,16 @@
-import { FormProvider, useFieldArray, useForm } from "react-hook-form"
+import { useFieldArray, useFormContext } from "react-hook-form"
 import { Button } from "../../../../components/Button"
 import { Card } from "../../../../components/Card"
 import { Divider } from "../../../../components/Divider/Divider"
 import { Typography } from "../../../../components/Typography"
-import { Link } from "../../../../models/Links"
 import { linksCard, linksWrapper } from "../../LinksTab.css"
 import { EmptyState } from "../EmptyState/EmptyState"
 import { LinkItem } from "../LinkItem"
 import { addLinkButtonStyle, buttonWrapper, footerStyle, headingStyle } from "./CustomizeLinksCard.css"
 
-type CustomizeLinksCardProps = {
-    linksData: Link[]
-}
-
-export const CustomizeLinksCard = ({ linksData }: CustomizeLinksCardProps) => {
-    const methods = useForm({
-        defaultValues: { links: linksData }
-    });
-    const { watch, control, formState: { isDirty } } = methods;
+export const CustomizeLinksCard = () => {
+    const { watch, control, formState: { isDirty } } = useFormContext();
     const { fields, append, remove } = useFieldArray({ control, name: 'links' })
-
     const formValues = watch();
 
     return (
@@ -31,18 +22,16 @@ export const CustomizeLinksCard = ({ linksData }: CustomizeLinksCardProps) => {
                     + Add new link
                 </Button>
 
-                <FormProvider {...methods}>
-                    {
-                        formValues.links && formValues?.links?.length !== 0 ?
-                            <div className={linksWrapper}>
-                                {fields.map((field, index) => (
-                                    <LinkItem key={field.id} index={index} removeItem={remove} />
-                                ))}
-                            </div>
-                            :
-                            <EmptyState />
-                    }
-                </FormProvider>
+                {
+                    formValues.links && formValues?.links?.length !== 0 ?
+                        <div className={linksWrapper}>
+                            {fields.map((field, index) => (
+                                <LinkItem key={field.id} index={index} removeItem={remove} />
+                            ))}
+                        </div>
+                        :
+                        <EmptyState />
+                }
             </div>
             <div className={footerStyle}>
                 <Divider />

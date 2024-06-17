@@ -31,9 +31,9 @@ export const LinkItem = ({ index, removeItem }: LinkItemProps) => {
                     control={control}
                     name={`links.${index}.platformName`}
                     render={({ field }) => {
-                        const { ref, fieldProps } = field;
+                        const { ref, ...fieldProps } = field;
                         return (
-                            <PlatformListSelect value={field.value} onValueChange={field.onChange} {...fieldProps} />)
+                            <PlatformListSelect onValueChange={field.onChange} {...fieldProps} />)
                     }}
                 />
             </div>
