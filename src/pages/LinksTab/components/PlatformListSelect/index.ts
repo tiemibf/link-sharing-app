@@ -1,1 +1,1 @@
-export * from './PlatformListSelect';
+export * from "./PlatformListSelect";

@@ -1,5 +1,5 @@
-import { dividerStyle } from "./Divider.css"
+import { dividerStyle } from "./Divider.css";
 
 export const Divider = () => {
-    return <div className={dividerStyle} />
-}
+  return <div className={dividerStyle} />;
+};

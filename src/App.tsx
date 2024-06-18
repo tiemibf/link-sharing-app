@@ -1,8 +1,8 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { EditPage } from "./pages/EditPage"
-import { ThemeProvider } from "./styles/ThemeProvider"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { EditPage } from "./pages/EditPage";
+import { ThemeProvider } from "./styles/ThemeProvider";
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <EditPage />
       </QueryClientProvider>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

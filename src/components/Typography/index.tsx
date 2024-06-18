@@ -1,4 +1,4 @@
 import { Body } from "./Body";
 import { Heading } from "./Heading";
 
-export const Typography = { Heading, Body }
+export const Typography = { Heading, Body };
