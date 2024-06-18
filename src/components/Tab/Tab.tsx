@@ -4,37 +4,47 @@ import clsx from "clsx";
 import { tabItem, tabList } from "./Tab.css";
 
 interface TabRootProps {
-    children: React.ReactNode;
-    defaultValue: string;
+  children: React.ReactNode;
+  defaultValue: string;
 }
 
 interface TabListProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 interface TabItemProps {
-    value: string;
-    children: React.ReactNode;
-    className?: string;
-    width?: string;
+  value: string;
+  children: React.ReactNode;
+  className?: string;
+  width?: string;
 }
 
-export const Root = ({ children, defaultValue, ...props }: TabRootProps): JSX.Element => {
-    return (
-        <Tabs.Root defaultValue={defaultValue} {...props}>
-            {children}
-        </Tabs.Root>
-    )
-}
+export const Root = ({
+  children,
+  defaultValue,
+  ...props
+}: TabRootProps): JSX.Element => {
+  return (
+    <Tabs.Root defaultValue={defaultValue} {...props}>
+      {children}
+    </Tabs.Root>
+  );
+};
 
-export const List = ({ children }: TabListProps) => <Tabs.List className={tabList}>{children}</Tabs.List>;
+export const List = ({ children }: TabListProps) => (
+  <Tabs.List className={tabList}>{children}</Tabs.List>
+);
 
 export const Item = ({ value, children, className, width }: TabItemProps) => {
-    return (
-        <Tabs.Trigger value={value} className={clsx(tabItem, className)} style={assignInlineVars({ width })}>
-            {children}
-        </Tabs.Trigger>
-    )
-}
+  return (
+    <Tabs.Trigger
+      value={value}
+      className={clsx(tabItem, className)}
+      style={assignInlineVars({ width })}
+    >
+      {children}
+    </Tabs.Trigger>
+  );
+};
 
-export const Content = Tabs.Content
+export const Content = Tabs.Content;

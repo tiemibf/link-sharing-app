@@ -1,1 +1,1 @@
-export * from './LinkItem';
+export * from "./LinkItem";

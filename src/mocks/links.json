@@ -1,18 +1,18 @@
 {
-    "links": [
-        {
-            "id": 987123,
-            "platformName": "Facebook",
-            "platformUrl": "http://www.facebook.com",
-            "createdAt": "2017-01-01T00:00:00Z",
-            "updatedAt": "2017-01-01T00:00:00Z"
-        },
-        {
-            "id": 987124,
-            "platformName": "Twitter",
-            "platformUrl": "http://www.twitter.com",
-            "createdAt": "2017-01-01T00:00:00Z",
-            "updatedAt": "2017-01-01T00:00:00Z"
-        }
-    ]
+  "links": [
+    {
+      "id": 987123,
+      "platformName": "Facebook",
+      "platformUrl": "http://www.facebook.com",
+      "createdAt": "2017-01-01T00:00:00Z",
+      "updatedAt": "2017-01-01T00:00:00Z"
+    },
+    {
+      "id": 987124,
+      "platformName": "Twitter",
+      "platformUrl": "http://www.twitter.com",
+      "createdAt": "2017-01-01T00:00:00Z",
+      "updatedAt": "2017-01-01T00:00:00Z"
+    }
+  ]
 }

@@ -1,3 +1,3 @@
-import { Content, Item, List, Root } from './Tab'
+import { Content, Item, List, Root } from "./Tab";
 
-export const Tab = { Root, List, Item, Content } 
+export const Tab = { Root, List, Item, Content };
