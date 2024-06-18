@@ -1,50 +1,52 @@
 import * as Select from '@radix-ui/react-select';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
+import React from 'react';
+import { IconChevronDown } from '../../assets';
+import { vars } from '../../styles/theme.css';
 import Icon from '../Icon/Icon';
-import { selectContent, selectOption, selectSeparator, selectTrigger } from './Select.css';
+import { selectContentStyle, selectOptionStyle, selectSeparatorStyle, selectTriggerStyle } from './Select.css';
 
-interface SelectRootProps {
-    name: string;
-    defaultValue?: string;
-    value?: string;
+type SelectRootProps = Select.SelectProps & {
     children: React.ReactNode;
-    onValueChange?: (value: string) => void;
 }
 
-export const Root = ({ defaultValue, value, name, children, onValueChange, ...props }: SelectRootProps) => {
+export const Root = ({ children, ...props }: SelectRootProps) => {
     return (
-        <Select.Root name={name} defaultValue={defaultValue} value={value} onValueChange={onValueChange} {...props}>
+        <Select.Root  {...props}>
             {children}
         </Select.Root>
     )
 }
 
 interface SelectTriggerProps {
+    children: React.ReactNode;
     placeholder?: string;
     width?: string;
-    value?: string | React.ReactNode;
-    renderValue?: React.ReactNode | string;
 }
 
-export const Trigger = ({ placeholder, width, value, renderValue }: SelectTriggerProps) => {
-
+export const Trigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(({ placeholder, width, children }: SelectTriggerProps, ref) => {
     return (
-        <Select.Trigger className={selectTrigger} style={assignInlineVars({ width })}>
-            <Select.Value placeholder={placeholder}>{renderValue || value}</Select.Value>
+        <Select.Trigger className={selectTriggerStyle} style={assignInlineVars({ width })} ref={ref}>
+            <Select.Value placeholder={placeholder}>
+                {children}
+            </Select.Value>
             <Select.Icon>
-                <Icon name='chevron-down' />
+                <Icon icon={IconChevronDown} color={vars.color.purple} />
             </Select.Icon>
         </Select.Trigger>
     )
-}
-interface SelectContentProps {
+})
+
+type SelectContentProps = Select.SelectContentProps & {
     children?: React.ReactNode;
 }
 
 export const Content = ({ children }: SelectContentProps) => {
+    const themeProviderNode = document.getElementById("themeProvider");
+
     return (
-        <Select.Portal>
-            <Select.Content position="popper" className={selectContent}>
+        <Select.Portal container={themeProviderNode}>
+            <Select.Content position="popper" className={selectContentStyle}>
                 <Select.Viewport>
                     <Select.Group>
                         {children}
@@ -64,10 +66,10 @@ interface SelectOptionProps {
 export const Option = ({ value, children, separator }: SelectOptionProps) => {
     return (
         <>
-            <Select.Item value={value} className={selectOption}>
+            <Select.Item value={value} className={selectOptionStyle}>
                 {children}
             </Select.Item>
-            {separator && <Select.Separator className={selectSeparator} />}
+            {separator && <Select.Separator className={selectSeparatorStyle} />}
         </>
     )
 }

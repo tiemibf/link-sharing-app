@@ -29,11 +29,11 @@ export const tabItem = style({
     }
 })
 
-globalStyle(`${tabItem}[data-state="active"] > div > div > svg > path`, {
+globalStyle(`${tabItem}[data-state="active"] > div > svg > path`, {
     fill: vars.color.purple,
 })
 
-globalStyle(`${tabItem}:hover > div > div > svg > path`, {
+globalStyle(`${tabItem}:hover > div > svg > path`, {
     fill: vars.color.purple,
 })
 

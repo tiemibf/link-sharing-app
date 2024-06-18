@@ -1,6 +1,6 @@
-import { createGlobalTheme } from "@vanilla-extract/css";
+import { createTheme, globalStyle } from "@vanilla-extract/css";
 
-export const vars = createGlobalTheme(':root', {
+export const [themeClass, vars] = createTheme({
     color: {
         lightPurple: '#efebff',
         purpleHover: '#beadff',
@@ -62,3 +62,8 @@ export const vars = createGlobalTheme(':root', {
         }
     }
 });
+
+globalStyle('body', {
+    margin: 0,
+    backgroundColor: vars.color.lightGray,
+})

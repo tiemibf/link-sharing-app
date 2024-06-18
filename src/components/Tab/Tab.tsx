@@ -1,4 +1,6 @@
 import * as Tabs from "@radix-ui/react-tabs";
+import { assignInlineVars } from "@vanilla-extract/dynamic";
+import clsx from "clsx";
 import { tabItem, tabList } from "./Tab.css";
 
 interface TabRootProps {
@@ -11,9 +13,10 @@ interface TabListProps {
 }
 
 interface TabItemProps {
-    title: string;
     value: string;
-    icon?: JSX.Element;
+    children: React.ReactNode;
+    className?: string;
+    width?: string;
 }
 
 export const Root = ({ children, defaultValue, ...props }: TabRootProps): JSX.Element => {
@@ -26,11 +29,10 @@ export const Root = ({ children, defaultValue, ...props }: TabRootProps): JSX.El
 
 export const List = ({ children }: TabListProps) => <Tabs.List className={tabList}>{children}</Tabs.List>;
 
-export const Item = ({ title, value, icon }: TabItemProps) => {
+export const Item = ({ value, children, className, width }: TabItemProps) => {
     return (
-        <Tabs.Trigger value={value} className={tabItem}>
-            {icon}
-            {title}
+        <Tabs.Trigger value={value} className={clsx(tabItem, className)} style={assignInlineVars({ width })}>
+            {children}
         </Tabs.Trigger>
     )
 }
