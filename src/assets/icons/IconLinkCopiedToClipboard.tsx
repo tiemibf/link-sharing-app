@@ -1,4 +1,3 @@
-import * as React from "react";
 import type { SVGProps } from "react";
 const SvgIconLinkCopiedToClipboard = (props: SVGProps<SVGSVGElement>) => (
   <svg
