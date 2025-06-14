@@ -1,5 +1,4 @@
-import { ReactSVG } from "react-svg";
-import { IconLink, IconProfileDetailsHeader } from "../../assets";
+import { IconLink, IconProfileDetailsHeader, LogoDevlinksLarge } from "../../assets";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import Icon from "../../components/Icon/Icon";
@@ -12,13 +11,11 @@ import {
   tabItemStyle,
 } from "./EditPage.css";
 
-const DEV_LINKS_LOGO = "src/assets/images/logo-devlinks-large.svg";
-
 export const EditPage = () => {
   return (
     <Tab.Root defaultValue="links">
       <Card className={appHeader}>
-        <ReactSVG src={DEV_LINKS_LOGO} className={devLinksLogo} />
+        <LogoDevlinksLarge className={devLinksLogo} />
         <Tab.List>
           <Tab.Item value="links" className={tabItemStyle}>
             <Icon icon={IconLink} />

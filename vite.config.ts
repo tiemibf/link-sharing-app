@@ -22,4 +22,12 @@ export default defineConfig({
     setupFiles: './src/tests/setup.js',
     dir: 'src'
   },
+  build: {
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name].[hash][extname]'
+      }
+    }
+  }
 });
