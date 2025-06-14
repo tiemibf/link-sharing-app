@@ -1,5 +1,9 @@
 import { style } from "@vanilla-extract/css";
 
+export const illustrationEmpty = style({
+  height: "160px"
+});
+
 export const emptyStateWrapper = style({
   display: "flex",
   flexDirection: "column",
