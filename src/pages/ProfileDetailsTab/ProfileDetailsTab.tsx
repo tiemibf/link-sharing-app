@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { IconUploadImage } from "../../assets/icons";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
@@ -16,22 +16,14 @@ type ProfileForm = {
 };
 
 export const ProfileDetailsTab = () => {
-    const methods = useForm<ProfileForm>({
-        defaultValues: {
-            profilePicture: null,
-            firstName: "",
-            lastName: "",
-            email: "",
-        },
-    });
-    const { register, handleSubmit, formState: { isDirty } } = methods;
+    const { register, handleSubmit, formState: { isDirty } } = useFormContext<ProfileForm>();
 
     const onSubmit = (data: ProfileForm) => {
         console.log(data);
     };
 
     return (
-        <FormProvider {...methods}>
+        <>
             <div className={linksTabContainer}>
                 <PreviewCard />
                 <Card className={linksCard} height="auto">
@@ -84,6 +76,6 @@ export const ProfileDetailsTab = () => {
                     </form>
                 </Card>
             </div>
-        </FormProvider>
+        </>
     );
 };
