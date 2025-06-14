@@ -13,6 +13,8 @@ import {
   headingStyle,
 } from "./CustomizeLinksCard.css";
 
+const MAX_LINKS = 5;
+
 export const CustomizeLinksCard = () => {
   const {
     watch,
@@ -21,6 +23,7 @@ export const CustomizeLinksCard = () => {
   } = useFormContext();
   const { fields, append, remove } = useFieldArray({ control, name: "links" });
   const formValues = watch();
+  const hasReachedLimit = fields.length >= MAX_LINKS;
 
   return (
     <Card className={linksCard} height="auto">
@@ -45,6 +48,7 @@ export const CustomizeLinksCard = () => {
             })
           }
           className={addLinkButtonStyle}
+          disabled={hasReachedLimit}
         >
           + Add new link
         </Button>
