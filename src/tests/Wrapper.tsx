@@ -6,7 +6,7 @@ export const queryClient = new QueryClient({
     defaultOptions: { queries: { retry: false } },
 });
 
-const FormWrapper = ({ children, ...rest }) => {
+const FormWrapper = ({ children, ...rest }: PropsWithChildren<unknown>) => {
     const methods = useForm({ ...rest });
     return <FormProvider {...methods}>{children}</FormProvider>;
 };
