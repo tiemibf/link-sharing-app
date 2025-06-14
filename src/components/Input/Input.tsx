@@ -1,3 +1,4 @@
+import { assignInlineVars } from "@vanilla-extract/dynamic";
 import React, { ComponentProps } from "react";
 import Icon from "../Icon/Icon";
 import {
@@ -11,15 +12,16 @@ type InputProps = ComponentProps<"input"> & {
   icon?: React.FunctionComponent;
   hasError?: boolean;
   errorMessage?: string;
+  width?: string;
 };
 
 export const Input = React.forwardRef(
   (
-    { icon, hasError, errorMessage, ...props }: InputProps,
+    { icon, hasError, errorMessage, width, ...props }: InputProps,
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <div className={inputWrapperStyle} data-invalid={hasError}>
+      <div className={inputWrapperStyle} data-invalid={hasError} style={assignInlineVars({ width })}>
         {icon && (
           <div className={inputIconStyle}>
             <Icon icon={icon} />

@@ -4,6 +4,7 @@ import { Card } from "../../components/Card";
 import Icon from "../../components/Icon/Icon";
 import { Tab } from "../../components/Tab";
 import { LinksTab } from "../LinksTab/LinksTab";
+import { ProfileDetailsTab } from "../ProfileDetailsTab/ProfileDetailsTab";
 import {
   appHeader,
   devLinksLogo,
@@ -36,6 +37,9 @@ export const EditPage = () => {
       </Card>
       <Tab.Content value="links" className={tabContentStyle}>
         <LinksTab />
+      </Tab.Content>
+      <Tab.Content value="profileDetails" className={tabContentStyle}>
+        <ProfileDetailsTab />
       </Tab.Content>
     </Tab.Root>
   );
