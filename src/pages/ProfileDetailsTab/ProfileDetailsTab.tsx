@@ -5,9 +5,9 @@ import { Card } from "../../components/Card";
 import { Divider } from "../../components/Divider";
 import { FileUploader } from "../../components/FileUploader";
 import { Input } from "../../components/Input";
+import { PreviewCard } from "../../components/PreviewCard";
 import { Typography } from "../../components/Typography";
 import { headingStyle } from "../LinksTab/components/CustomizeLinksCard/CustomizeLinksCard.css";
-import { PreviewCard } from "../LinksTab/components/PreviewCard";
 import { linksCard, linksTabContainer } from "../LinksTab/LinksTab.css";
 import { footerContainer, formField, inputFieldsCard, pictureUploadCard, profileDetailsContainer, saveButtonContainer } from "./ProfileDetailsTab.css.ts";
 

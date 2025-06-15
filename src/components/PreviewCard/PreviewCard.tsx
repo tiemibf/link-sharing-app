@@ -1,12 +1,12 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import React, { FunctionComponent } from "react";
 import { useFormContext } from "react-hook-form";
-import { IconArrowRight } from "../../../../assets";
-import { Card } from "../../../../components/Card";
-import { Icon } from "../../../../components/Icon";
-import { Link } from "../../../../models/Links";
-import { Platform, platformsList } from "../../../../utils/platformsList";
+import { IconArrowRight } from "../../assets";
+import { Link } from "../../models/Links";
+import { Platform, platformsList } from "../../utils/platformsList";
+import { Card } from "../Card";
 import { CellphoneMockup } from "../CellphoneMockup";
+import { Icon } from "../Icon";
 import {
   emptyMockupItem,
   getLinkButtonStyle,
