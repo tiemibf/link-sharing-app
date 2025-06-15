@@ -56,7 +56,7 @@ export const PreviewCard = () => {
                 }
               />
             ) : (
-              <div className={emptyMockupItem} />
+              <div key={`empty-${index}`} className={emptyMockupItem} />
             );
           })}
         </div>

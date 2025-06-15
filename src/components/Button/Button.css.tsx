@@ -34,6 +34,8 @@ export const getButtonStyle = recipe({
         },
         ":disabled": {
           border: `1px solid ${vars.color.lightPurple}`,
+          color: vars.color.lightPurple,
+          cursor: "not-allowed",
         },
       },
     },

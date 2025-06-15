@@ -16,6 +16,7 @@ export const body = recipe({
     color: {
       darkGray: { color: vars.color.darkGray },
       gray: { color: vars.color.gray },
+      red: { color: vars.color.red },
     },
   },
   defaultVariants: {

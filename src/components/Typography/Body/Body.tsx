@@ -6,7 +6,7 @@ import { body } from "./Body.css";
 type BodyProps = ComponentProps<"p"> & {
   children: React.ReactNode;
   size?: "small" | "base";
-  color?: "darkGray" | "gray";
+  color?: "darkGray" | "gray" | "red";
   asChild?: boolean;
   className?: string;
 };
