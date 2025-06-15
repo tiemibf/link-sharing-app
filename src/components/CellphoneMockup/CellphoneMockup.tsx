@@ -1,15 +1,38 @@
 import { clsx } from "clsx";
 import { ComponentProps } from "react";
 import { useFormContext } from "react-hook-form";
+import { useTab } from "../../contexts/TabContext";
 import * as styles from "./CellphoneMockup.css";
 
-interface CellphoneMockupProps extends ComponentProps<"div"> { }
+interface CellphoneMockupProps extends ComponentProps<"div"> {
+  savedProfileDetails?: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    profilePicture: FileList | null;
+  };
+}
 
-export const CellphoneMockup = ({ children }: CellphoneMockupProps) => {
+export const CellphoneMockup = ({ children, savedProfileDetails }: CellphoneMockupProps) => {
   const { watch } = useFormContext();
-  const { firstName, lastName, email, profilePicture } = watch();
-  const fullName = firstName && lastName ? `${firstName} ${lastName}` : firstName || lastName || "";
-  const profilePictureUrl = profilePicture?.[0] ? URL.createObjectURL(profilePicture[0]) : null;
+  const { currentTab } = useTab();
+  const formValues = watch();
+
+  // Use form values for Profile Details tab, saved values for Links tab
+  const profileDetails = currentTab === 'profileDetails' ? {
+    firstName: formValues.firstName,
+    lastName: formValues.lastName,
+    email: formValues.email,
+    profilePicture: formValues.profilePicture
+  } : savedProfileDetails;
+
+  const fullName = profileDetails?.firstName && profileDetails?.lastName
+    ? `${profileDetails.firstName} ${profileDetails.lastName}`
+    : profileDetails?.firstName || profileDetails?.lastName || "";
+
+  const profilePictureUrl = profileDetails?.profilePicture?.[0]
+    ? URL.createObjectURL(profileDetails.profilePicture[0])
+    : null;
 
   return (
     <div className={styles.container}>
@@ -47,9 +70,9 @@ export const CellphoneMockup = ({ children }: CellphoneMockupProps) => {
             </div>
             <div className={clsx(
               styles.email,
-              !email ? styles.emailPlaceholder : styles.emailWithContent
+              !profileDetails?.email ? styles.emailPlaceholder : styles.emailWithContent
             )}>
-              {email}
+              {profileDetails?.email}
             </div>
           </div>
           <div>{children}</div>

@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { v4 as uuidv4 } from 'uuid';
 import { Button } from "../../../../components/Button";
@@ -34,10 +33,6 @@ export const CustomizeLinksCard = ({ onSave }: CustomizeLinksCardProps) => {
   const handleSave = () => {
     onSave();
   };
-
-  const isFormEmpty = useMemo(() => {
-    return formValues.links.length === 0;
-  }, [formValues]);
 
   return (
     <Card className={linksCard} height="auto">
@@ -77,14 +72,14 @@ export const CustomizeLinksCard = ({ onSave }: CustomizeLinksCardProps) => {
           <EmptyState />
         )}
       </div>
-      {!isFormEmpty && (<div className={footerStyle}>
+      <div className={footerStyle}>
         <Divider />
         <div className={buttonWrapper}>
           <Button width="80px" disabled={!isDirty} onClick={handleSave}>
             Save
           </Button>
         </div>
-      </div>)}
+      </div>
     </Card>
   );
 };

@@ -13,20 +13,35 @@ import { appHeader, devLinksLogo, tabContentStyle, tabItemStyle } from "./EditPa
 
 export const EditPage = () => {
   const [savedLinks, setSavedLinks] = useState<Link[]>([]);
+  const [savedProfileDetails, setSavedProfileDetails] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    profilePicture: null as FileList | null
+  });
   const { setCurrentTab } = useTab();
 
   const methods = useForm<LinkForm>({
     defaultValues: {
       links: savedLinks,
-      firstName: '',
-      lastName: '',
-      email: '',
-      profilePicture: null
+      firstName: savedProfileDetails.firstName,
+      lastName: savedProfileDetails.lastName,
+      email: savedProfileDetails.email,
+      profilePicture: savedProfileDetails.profilePicture
     },
   });
 
   const handleSaveLinks = (links: Link[]) => {
     setSavedLinks(links);
+  };
+
+  const handleSaveProfileDetails = (profileDetails: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    profilePicture: FileList | null;
+  }) => {
+    setSavedProfileDetails(profileDetails);
   };
 
   return (
@@ -54,10 +69,18 @@ export const EditPage = () => {
           <div />
         </Card>
         <Tab.Content value="links" className={tabContentStyle}>
-          <LinksTab savedLinks={savedLinks} onSaveLinks={handleSaveLinks} />
+          <LinksTab
+            savedLinks={savedLinks}
+            savedProfileDetails={savedProfileDetails}
+            onSaveLinks={handleSaveLinks}
+          />
         </Tab.Content>
         <Tab.Content value="profileDetails" className={tabContentStyle}>
-          <ProfileDetailsTab savedLinks={savedLinks} />
+          <ProfileDetailsTab
+            savedLinks={savedLinks}
+            savedProfileDetails={savedProfileDetails}
+            onSaveProfileDetails={handleSaveProfileDetails}
+          />
         </Tab.Content>
       </Tab.Root>
     </FormProvider>

@@ -18,14 +18,22 @@ import {
 
 interface PreviewCardProps {
   savedLinks?: Link[];
+  savedProfileDetails?: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    profilePicture: FileList | null;
+  };
 }
 
-export const PreviewCard = ({ savedLinks }: PreviewCardProps) => {
+export const PreviewCard = ({ savedLinks, savedProfileDetails }: PreviewCardProps) => {
   const array = Array.from({ length: 5 });
   const { watch } = useFormContext();
   const { currentTab } = useTab();
   const formValues = watch();
 
+  // For Links tab: use form values for links, saved values for profile details
+  // For Profile Details tab: use saved values for links, form values for profile details
   const links = currentTab === 'links' ? (formValues?.links || []) : (savedLinks || []);
 
   const itemProperty = (
@@ -41,7 +49,7 @@ export const PreviewCard = ({ savedLinks }: PreviewCardProps) => {
 
   return (
     <Card className={previewCard} height="auto">
-      <CellphoneMockup>
+      <CellphoneMockup savedProfileDetails={savedProfileDetails}>
         <div className={linksWrapper}>
           {array.map((_, index) => {
             const item: Link = links[index];

@@ -22,10 +22,22 @@ type ProfileForm = {
 
 interface ProfileDetailsTabProps {
     savedLinks: Link[];
+    savedProfileDetails: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        profilePicture: FileList | null;
+    };
+    onSaveProfileDetails: (profileDetails: {
+        firstName: string;
+        lastName: string;
+        email: string;
+        profilePicture: FileList | null;
+    }) => void;
 }
 
-export const ProfileDetailsTab = ({ savedLinks }: ProfileDetailsTabProps) => {
-    const { register, handleSubmit, formState: { isDirty }, setValue, reset, watch } = useFormContext<ProfileForm>();
+export const ProfileDetailsTab = ({ savedLinks, savedProfileDetails, onSaveProfileDetails }: ProfileDetailsTabProps) => {
+    const { register, handleSubmit, formState: { isDirty }, setValue, reset, watch, getValues } = useFormContext<ProfileForm>();
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const profilePicture = watch('profilePicture');
 
@@ -33,26 +45,49 @@ export const ProfileDetailsTab = ({ savedLinks }: ProfileDetailsTabProps) => {
         if (profilePicture?.[0]) {
             const previewUrl = URL.createObjectURL(profilePicture[0]);
             setImagePreview(previewUrl);
+            return () => URL.revokeObjectURL(previewUrl);
         }
     }, [profilePicture]);
 
-    const handleFileSelect = (file: File) => {
-        const previewUrl = URL.createObjectURL(file);
-        setImagePreview(previewUrl);
+    useEffect(() => {
+        const currentValues = getValues();
+        reset({
+            ...currentValues,
+            firstName: savedProfileDetails.firstName,
+            lastName: savedProfileDetails.lastName,
+            email: savedProfileDetails.email,
+            profilePicture: savedProfileDetails.profilePicture
+        });
 
+        if (savedProfileDetails.profilePicture?.[0]) {
+            const previewUrl = URL.createObjectURL(savedProfileDetails.profilePicture[0]);
+            setImagePreview(previewUrl);
+            return () => URL.revokeObjectURL(previewUrl);
+        } else {
+            setImagePreview(null);
+        }
+    }, [savedProfileDetails, reset, getValues]);
+
+    const handleFileSelect = (file: File) => {
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         setValue('profilePicture', dataTransfer.files, { shouldDirty: true });
     };
 
     const onSubmit = (data: ProfileForm) => {
+        onSaveProfileDetails({
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            profilePicture: data.profilePicture
+        });
         reset(data, { keepDirty: false });
     };
 
     return (
         <>
             <div className={linksTabContainer}>
-                <PreviewCard savedLinks={savedLinks} />
+                <PreviewCard savedLinks={savedLinks} savedProfileDetails={savedProfileDetails} />
                 <Card className={linksCard} height="auto">
                     <form onSubmit={handleSubmit(onSubmit)} className={profileDetailsContainer}>
                         <div>

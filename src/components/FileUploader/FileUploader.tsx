@@ -44,7 +44,9 @@ export const FileUploader = ({
         onDrop,
         accept,
         maxSize,
-        multiple: false
+        multiple: false,
+        noClick: false,
+        noKeyboard: false
     });
 
     return (
@@ -52,7 +54,10 @@ export const FileUploader = ({
             <div
                 {...getRootProps()}
                 className={`${styles.dropzone} ${isDragActive ? styles.dropzoneActive : ''}`}
+                role="button"
+                tabIndex={0}
             >
+                <input {...getInputProps()} />
                 {previewUrl ? (
                     <>
                         <img
@@ -73,7 +78,6 @@ export const FileUploader = ({
                         </span>
                     </>
                 )}
-                <input {...getInputProps()} />
             </div>
             <div>
                 {error ? (
