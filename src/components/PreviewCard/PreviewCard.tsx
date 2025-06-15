@@ -1,7 +1,7 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import React, { FunctionComponent } from "react";
 import { useFormContext } from "react-hook-form";
-import { IconArrowRight } from "../../assets";
+import { IconArrowRight, IconLink } from "../../assets";
 import { Link } from "../../models/Links";
 import { Platform, platformsList } from "../../utils/platformsList";
 import { Card } from "../Card";
@@ -52,7 +52,7 @@ export const PreviewCard = () => {
                   (itemProperty(
                     item.platformName,
                     "icon",
-                  ) as FunctionComponent) ?? "placeholder"
+                  ) as FunctionComponent) ?? IconLink
                 }
               />
             ) : (

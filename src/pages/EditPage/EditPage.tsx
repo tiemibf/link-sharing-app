@@ -1,6 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { IconLink, IconProfileDetailsHeader, LogoDevlinksLarge } from "../../assets";
-import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import Icon from "../../components/Icon/Icon";
 import { Tab } from "../../components/Tab";
@@ -54,9 +53,10 @@ export const EditPage = () => {
               Profile Details
             </Tab.Item>
           </Tab.List>
-          <Button variant="secondary" width="114px">
+          {/* <Button variant="secondary" width="114px">
             Preview
-          </Button>
+          </Button> */}
+          <div />
         </Card>
         <Tab.Content value="links" className={tabContentStyle}>
           <LinksTab />
