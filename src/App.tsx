@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TabProvider } from "./contexts/TabContext";
 import { EditPage } from "./pages/EditPage";
 import { ThemeProvider } from "./styles/ThemeProvider";
 
@@ -8,7 +9,9 @@ function App() {
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <EditPage />
+        <TabProvider>
+          <EditPage />
+        </TabProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

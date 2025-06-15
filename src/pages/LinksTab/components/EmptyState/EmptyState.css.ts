@@ -8,11 +8,12 @@ export const emptyStateWrapper = style({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  padding: "62px 220px",
+  paddingTop: "60px",
   justifyContent: "center",
 });
 
 export const textStyle = style({
   marginTop: "24px",
   textAlign: "center",
+  maxWidth: "480px",
 });

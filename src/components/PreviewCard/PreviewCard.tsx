@@ -2,6 +2,7 @@ import { assignInlineVars } from "@vanilla-extract/dynamic";
 import React, { FunctionComponent } from "react";
 import { useFormContext } from "react-hook-form";
 import { IconArrowRight, IconLink } from "../../assets";
+import { useTab } from "../../contexts/TabContext";
 import { Link } from "../../models/Links";
 import { Platform, platformsList } from "../../utils/platformsList";
 import { Card } from "../Card";
@@ -15,10 +16,17 @@ import {
   previewCard,
 } from "./PreviewCard.css";
 
-export const PreviewCard = () => {
+interface PreviewCardProps {
+  savedLinks?: Link[];
+}
+
+export const PreviewCard = ({ savedLinks }: PreviewCardProps) => {
   const array = Array.from({ length: 5 });
   const { watch } = useFormContext();
+  const { currentTab } = useTab();
   const formValues = watch();
+
+  const links = currentTab === 'links' ? (formValues?.links || []) : (savedLinks || []);
 
   const itemProperty = (
     platformName: string,
@@ -36,7 +44,7 @@ export const PreviewCard = () => {
       <CellphoneMockup>
         <div className={linksWrapper}>
           {array.map((_, index) => {
-            const item: Link = formValues?.links?.[index];
+            const item: Link = links[index];
             return item ? (
               <MockupItemPreview
                 key={item.id}
@@ -65,12 +73,12 @@ export const PreviewCard = () => {
   );
 };
 
-export type MockupItemPreviewProps = {
+interface MockupItemPreviewProps {
   url: string;
   platformName: string;
-  platformIcon: React.FunctionComponent;
+  platformIcon: FunctionComponent;
   backgroundColor: string;
-};
+}
 
 const MockupItemPreview = ({
   url,

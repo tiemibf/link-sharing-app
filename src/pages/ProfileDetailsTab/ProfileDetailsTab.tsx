@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
@@ -7,6 +7,7 @@ import { FileUploader } from "../../components/FileUploader";
 import { Input } from "../../components/Input";
 import { PreviewCard } from "../../components/PreviewCard";
 import { Typography } from "../../components/Typography";
+import { Link } from "../../models/Links";
 import { headingStyle } from "../LinksTab/components/CustomizeLinksCard/CustomizeLinksCard.css";
 import { linksCard, linksTabContainer } from "../LinksTab/LinksTab.css";
 import { footerContainer, formField, inputFieldsCard, pictureUploadCard, profileDetailsContainer, saveButtonContainer } from "./ProfileDetailsTab.css.ts";
@@ -16,11 +17,24 @@ type ProfileForm = {
     firstName: string;
     lastName: string;
     email: string;
+    links: Link[];
 };
 
-export const ProfileDetailsTab = () => {
-    const { register, handleSubmit, formState: { isDirty }, setValue } = useFormContext<ProfileForm>();
+interface ProfileDetailsTabProps {
+    savedLinks: Link[];
+}
+
+export const ProfileDetailsTab = ({ savedLinks }: ProfileDetailsTabProps) => {
+    const { register, handleSubmit, formState: { isDirty }, setValue, reset, watch } = useFormContext<ProfileForm>();
     const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const profilePicture = watch('profilePicture');
+
+    useEffect(() => {
+        if (profilePicture?.[0]) {
+            const previewUrl = URL.createObjectURL(profilePicture[0]);
+            setImagePreview(previewUrl);
+        }
+    }, [profilePicture]);
 
     const handleFileSelect = (file: File) => {
         const previewUrl = URL.createObjectURL(file);
@@ -32,13 +46,13 @@ export const ProfileDetailsTab = () => {
     };
 
     const onSubmit = (data: ProfileForm) => {
-        console.log(data);
+        reset(data, { keepDirty: false });
     };
 
     return (
         <>
             <div className={linksTabContainer}>
-                <PreviewCard />
+                <PreviewCard savedLinks={savedLinks} />
                 <Card className={linksCard} height="auto">
                     <form onSubmit={handleSubmit(onSubmit)} className={profileDetailsContainer}>
                         <div>
@@ -61,33 +75,45 @@ export const ProfileDetailsTab = () => {
                         <div className={inputFieldsCard}>
                             <div className={formField}>
                                 <Typography.Body color="gray" asChild>
-                                    <label htmlFor="firstName">First name*</label>
+                                    <label>First name*</label>
                                 </Typography.Body>
-                                <Input id="firstName" placeholder="e.g. John" {...register('firstName', { required: true })} width="432px" />
+                                <Input
+                                    placeholder="e.g. John"
+                                    {...register('firstName')}
+                                    width="432px"
+                                />
                             </div>
                             <div className={formField}>
                                 <Typography.Body color="gray" asChild>
-                                    <label htmlFor="lastName">Last name*</label>
+                                    <label>Last name*</label>
                                 </Typography.Body>
-                                <Input id="lastName" placeholder="e.g. Appleseed" {...register('lastName', { required: true })} width="432px" />
+                                <Input
+                                    placeholder="e.g. Appleseed"
+                                    {...register('lastName')}
+                                    width="432px"
+                                />
                             </div>
                             <div className={formField}>
                                 <Typography.Body color="gray" asChild>
-                                    <label htmlFor="email">Email</label>
+                                    <label>Email</label>
                                 </Typography.Body>
-                                <Input id="email" placeholder="e.g. email@example.com" type="email" {...register('email', { required: true })} width="432px" />
-                            </div>
-                        </div>
-                        <div className={footerContainer}>
-                            <Divider />
-                            <div className={saveButtonContainer}>
-                                <Button width="80px" type="submit" disabled={!isDirty}>
-                                    Save
-                                </Button>
+                                <Input
+                                    placeholder="e.g. email@example.com"
+                                    {...register('email')}
+                                    width="432px"
+                                />
                             </div>
                         </div>
                     </form>
                 </Card>
+            </div>
+            <div className={footerContainer}>
+                <Divider />
+                <div className={saveButtonContainer}>
+                    <Button width="80px" disabled={!isDirty} onClick={handleSubmit(onSubmit)}>
+                        Save
+                    </Button>
+                </div>
             </div>
         </>
     );

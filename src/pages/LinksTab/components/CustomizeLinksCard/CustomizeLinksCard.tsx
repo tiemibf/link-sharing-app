@@ -1,4 +1,6 @@
+import { useMemo } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
+import { v4 as uuidv4 } from 'uuid';
 import { Button } from "../../../../components/Button";
 import { Card } from "../../../../components/Card";
 import { Divider } from "../../../../components/Divider";
@@ -15,15 +17,27 @@ import {
 
 const MAX_LINKS = 5;
 
-export const CustomizeLinksCard = () => {
+interface CustomizeLinksCardProps {
+  onSave: () => void;
+}
+
+export const CustomizeLinksCard = ({ onSave }: CustomizeLinksCardProps) => {
   const {
     watch,
     control,
-    formState: { isDirty },
+    formState: { isDirty, },
   } = useFormContext();
   const { fields, append, remove } = useFieldArray({ control, name: "links" });
   const formValues = watch();
   const hasReachedLimit = fields.length >= MAX_LINKS;
+
+  const handleSave = () => {
+    onSave();
+  };
+
+  const isFormEmpty = useMemo(() => {
+    return formValues.links.length === 0;
+  }, [formValues]);
 
   return (
     <Card className={linksCard} height="auto">
@@ -42,7 +56,7 @@ export const CustomizeLinksCard = () => {
             append({
               platformUrl: "",
               platformName: "",
-              id: 0,
+              id: uuidv4(),
               createdAt: "",
               updatedAt: "",
             })
@@ -63,14 +77,14 @@ export const CustomizeLinksCard = () => {
           <EmptyState />
         )}
       </div>
-      <div className={footerStyle}>
+      {!isFormEmpty && (<div className={footerStyle}>
         <Divider />
         <div className={buttonWrapper}>
-          <Button width="80px" disabled={!isDirty}>
+          <Button width="80px" disabled={!isDirty} onClick={handleSave}>
             Save
           </Button>
         </div>
-      </div>
+      </div>)}
     </Card>
   );
 };
