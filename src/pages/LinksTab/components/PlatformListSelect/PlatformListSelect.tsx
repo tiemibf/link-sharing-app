@@ -1,6 +1,6 @@
 import { SelectProps } from "@radix-ui/react-select";
 import { IconLink } from "../../../../assets";
-import Icon from "../../../../components/Icon/Icon";
+import { Icon } from "../../../../components/Icon";
 import { Select } from "../../../../components/Select";
 import { platformsList } from "../../../../utils/platformsList";
 import { triggerValueStyle } from "./PlatformListSelect.css";

@@ -1,10 +1,10 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button } from "../../../../components/Button";
 import { Card } from "../../../../components/Card";
-import { Divider } from "../../../../components/Divider/Divider";
+import { Divider } from "../../../../components/Divider";
 import { Typography } from "../../../../components/Typography";
 import { linksCard, linksWrapper } from "../../LinksTab.css";
-import { EmptyState } from "../EmptyState/EmptyState";
+import { EmptyState } from "../EmptyState";
 import { LinkItem } from "../LinkItem";
 import {
   addLinkButtonStyle,

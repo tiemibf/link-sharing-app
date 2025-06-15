@@ -3,7 +3,7 @@ import { assignInlineVars } from "@vanilla-extract/dynamic";
 import React from "react";
 import { IconChevronDown } from "../../assets";
 import { vars } from "../../styles/theme.css";
-import Icon from "../Icon/Icon";
+import { Icon } from "../Icon";
 import {
   selectContentStyle,
   selectOptionStyle,

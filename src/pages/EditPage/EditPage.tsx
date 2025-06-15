@@ -7,7 +7,7 @@ import { Tab } from "../../components/Tab";
 import { Link } from "../../models/Links";
 import { useGetLinks } from "../../services/LinksService/useGetLinks";
 import { LinksTab } from "../LinksTab/LinksTab";
-import { ProfileDetailsTab } from "../ProfileDetailsTab/ProfileDetailsTab";
+import { ProfileDetailsTab } from "../ProfileDetailsTab";
 import {
   appHeader,
   devLinksLogo,

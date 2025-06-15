@@ -3,10 +3,10 @@ import React, { FunctionComponent } from "react";
 import { useFormContext } from "react-hook-form";
 import { IconArrowRight } from "../../../../assets";
 import { Card } from "../../../../components/Card";
-import Icon from "../../../../components/Icon/Icon";
+import { Icon } from "../../../../components/Icon";
 import { Link } from "../../../../models/Links";
 import { Platform, platformsList } from "../../../../utils/platformsList";
-import { CellphoneMockup } from "../CellphoneMockup/CellphoneMockup";
+import { CellphoneMockup } from "../CellphoneMockup";
 import {
   emptyMockupItem,
   getLinkButtonStyle,
