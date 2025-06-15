@@ -6,6 +6,7 @@ import { tabItem, tabList } from "./Tab.css";
 interface TabRootProps {
   children: React.ReactNode;
   defaultValue: string;
+  onValueChange: (value: string) => void;
 }
 
 interface TabListProps {

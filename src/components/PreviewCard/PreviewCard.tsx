@@ -1,12 +1,13 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import React, { FunctionComponent } from "react";
 import { useFormContext } from "react-hook-form";
-import { IconArrowRight } from "../../../../assets";
-import { Card } from "../../../../components/Card";
-import Icon from "../../../../components/Icon/Icon";
-import { Link } from "../../../../models/Links";
-import { Platform, platformsList } from "../../../../utils/platformsList";
-import { CellphoneMockup } from "../CellphoneMockup/CellphoneMockup";
+import { IconArrowRight, IconLink } from "../../assets";
+import { useTab } from "../../contexts/TabContext";
+import { Link } from "../../models/Links";
+import { Platform, platformsList } from "../../utils/platformsList";
+import { Card } from "../Card";
+import { CellphoneMockup } from "../CellphoneMockup";
+import { Icon } from "../Icon";
 import {
   emptyMockupItem,
   getLinkButtonStyle,
@@ -15,10 +16,25 @@ import {
   previewCard,
 } from "./PreviewCard.css";
 
-export const PreviewCard = () => {
+interface PreviewCardProps {
+  savedLinks?: Link[];
+  savedProfileDetails?: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    profilePicture: FileList | null;
+  };
+}
+
+export const PreviewCard = ({ savedLinks, savedProfileDetails }: PreviewCardProps) => {
   const array = Array.from({ length: 5 });
   const { watch } = useFormContext();
+  const { currentTab } = useTab();
   const formValues = watch();
+
+  // For Links tab: use form values for links, saved values for profile details
+  // For Profile Details tab: use saved values for links, form values for profile details
+  const links = currentTab === 'links' ? (formValues?.links || []) : (savedLinks || []);
 
   const itemProperty = (
     platformName: string,
@@ -33,10 +49,10 @@ export const PreviewCard = () => {
 
   return (
     <Card className={previewCard} height="auto">
-      <CellphoneMockup>
+      <CellphoneMockup savedProfileDetails={savedProfileDetails}>
         <div className={linksWrapper}>
           {array.map((_, index) => {
-            const item: Link = formValues?.links?.[index];
+            const item: Link = links[index];
             return item ? (
               <MockupItemPreview
                 key={item.id}
@@ -52,7 +68,7 @@ export const PreviewCard = () => {
                   (itemProperty(
                     item.platformName,
                     "icon",
-                  ) as FunctionComponent) ?? "placeholder"
+                  ) as FunctionComponent) ?? IconLink
                 }
               />
             ) : (
@@ -65,12 +81,12 @@ export const PreviewCard = () => {
   );
 };
 
-export type MockupItemPreviewProps = {
+interface MockupItemPreviewProps {
   url: string;
   platformName: string;
-  platformIcon: React.FunctionComponent;
+  platformIcon: FunctionComponent;
   backgroundColor: string;
-};
+}
 
 const MockupItemPreview = ({
   url,
