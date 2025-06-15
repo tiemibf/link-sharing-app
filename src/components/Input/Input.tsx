@@ -1,5 +1,6 @@
 import { assignInlineVars } from "@vanilla-extract/dynamic";
 import React, { ComponentProps } from "react";
+import { vars } from "../../styles/theme.css";
 import Icon from "../Icon/Icon";
 import {
   errorStyle,
@@ -21,7 +22,7 @@ export const Input = React.forwardRef(
     ref: React.ForwardedRef<HTMLInputElement>,
   ) => {
     return (
-      <div className={inputWrapperStyle} data-invalid={hasError} style={assignInlineVars({ width })}>
+      <div className={inputWrapperStyle} data-invalid={hasError} style={assignInlineVars({ width, backgroundColor: vars.color.white })}>
         {icon && (
           <div className={inputIconStyle}>
             <Icon icon={icon} />

@@ -2,12 +2,13 @@ import { useFormContext } from "react-hook-form";
 import { IconUploadImage } from "../../assets/icons";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
+import { Divider } from "../../components/Divider/Divider";
 import { Input } from "../../components/Input";
 import { Typography } from "../../components/Typography";
 import { headingStyle } from "../LinksTab/components/CustomizeLinksCard/CustomizeLinksCard.css";
 import { PreviewCard } from "../LinksTab/components/PreviewCard";
 import { linksCard, linksTabContainer } from "../LinksTab/LinksTab.css";
-import { footerContainer, formField, formFieldsContainer, profileDetailsContainer, profilePictureContainer, profilePictureHint, profilePictureInput, profilePictureLabel, uploadIcon, uploadText } from "./ProfileDetailsTab.css.ts";
+import { footerContainer, formField, inputFieldsCard, profileDetailsContainer, profilePictureContainer, profilePictureHint, profilePictureInput, profilePictureLabel, saveButtonContainer, uploadIcon, uploadText } from "./ProfileDetailsTab.css.ts";
 
 type ProfileForm = {
     profilePicture: FileList | null;
@@ -47,7 +48,7 @@ export const ProfileDetailsTab = () => {
                                 Image must be below 1024x1024px.<br />Use PNG or JPG format.
                             </div>
                         </div>
-                        <div className={formFieldsContainer}>
+                        <div className={inputFieldsCard}>
                             <div className={formField}>
                                 <Typography.Body color="gray" asChild>
                                     <label htmlFor="firstName">First name*</label>
@@ -66,7 +67,10 @@ export const ProfileDetailsTab = () => {
                                 </Typography.Body>
                                 <Input id="email" placeholder="e.g. email@example.com" type="email" {...register('email', { required: true })} width="432px" />
                             </div>
-                            <div className={footerContainer}>
+                        </div>
+                        <div className={footerContainer}>
+                            <Divider />
+                            <div className={saveButtonContainer}>
                                 <Button width="80px" type="submit" disabled={!isDirty}>
                                     Save
                                 </Button>
