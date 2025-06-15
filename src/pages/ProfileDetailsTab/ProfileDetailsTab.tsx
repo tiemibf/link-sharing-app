@@ -1,14 +1,15 @@
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { IconUploadImage } from "../../assets/icons";
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
 import { Divider } from "../../components/Divider/Divider";
+import { FileUploader } from "../../components/FileUploader/FileUploader";
 import { Input } from "../../components/Input";
 import { Typography } from "../../components/Typography";
 import { headingStyle } from "../LinksTab/components/CustomizeLinksCard/CustomizeLinksCard.css";
 import { PreviewCard } from "../LinksTab/components/PreviewCard";
 import { linksCard, linksTabContainer } from "../LinksTab/LinksTab.css";
-import { footerContainer, formField, inputFieldsCard, profileDetailsContainer, profilePictureContainer, profilePictureHint, profilePictureInput, profilePictureLabel, saveButtonContainer, uploadIcon, uploadText } from "./ProfileDetailsTab.css.ts";
+import { footerContainer, formField, inputFieldsCard, pictureUploadCard, profileDetailsContainer, saveButtonContainer } from "./ProfileDetailsTab.css.ts";
 
 type ProfileForm = {
     profilePicture: FileList | null;
@@ -18,7 +19,17 @@ type ProfileForm = {
 };
 
 export const ProfileDetailsTab = () => {
-    const { register, handleSubmit, formState: { isDirty } } = useFormContext<ProfileForm>();
+    const { register, handleSubmit, formState: { isDirty }, setValue } = useFormContext<ProfileForm>();
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+    const handleFileSelect = (file: File) => {
+        const previewUrl = URL.createObjectURL(file);
+        setImagePreview(previewUrl);
+
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        setValue('profilePicture', dataTransfer.files, { shouldDirty: true });
+    };
 
     const onSubmit = (data: ProfileForm) => {
         console.log(data);
@@ -38,15 +49,14 @@ export const ProfileDetailsTab = () => {
                                 Add your details to create a personal touch to your profile.
                             </Typography.Body>
                         </div>
-                        <div className={profilePictureContainer}>
-                            <label htmlFor="profilePicture" className={profilePictureLabel}>
-                                <IconUploadImage className={uploadIcon} />
-                                <span className={uploadText}>+ Upload Image</span>
-                                <input id="profilePicture" type="file" accept="image/png, image/jpeg" className={profilePictureInput} {...register('profilePicture')} />
-                            </label>
-                            <div className={profilePictureHint}>
-                                Image must be below 1024x1024px.<br />Use PNG or JPG format.
-                            </div>
+                        <div className={pictureUploadCard}>
+                            <Typography.Body color="gray" asChild>
+                                <label>Profile picture</label>
+                            </Typography.Body>
+                            <FileUploader
+                                onFileSelect={handleFileSelect}
+                                previewUrl={imagePreview}
+                            />
                         </div>
                         <div className={inputFieldsCard}>
                             <div className={formField}>

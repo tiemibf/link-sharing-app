@@ -26,7 +26,13 @@ type LinkForm = {
 export const EditPage = () => {
   const { data: linksData } = useGetLinks();
   const methods = useForm<LinkForm>({
-    defaultValues: { links: linksData },
+    defaultValues: {
+      links: linksData,
+      firstName: '',
+      lastName: '',
+      email: '',
+      profilePicture: null
+    },
   });
 
   return (

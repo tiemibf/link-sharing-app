@@ -7,8 +7,9 @@ interface CellphoneMockupProps extends ComponentProps<"div"> { }
 
 export const CellphoneMockup = ({ children }: CellphoneMockupProps) => {
   const { watch } = useFormContext();
-  const { firstName, lastName, email } = watch();
+  const { firstName, lastName, email, profilePicture } = watch();
   const fullName = firstName && lastName ? `${firstName} ${lastName}` : firstName || lastName || "";
+  const profilePictureUrl = profilePicture?.[0] ? URL.createObjectURL(profilePicture[0]) : null;
 
   return (
     <div className={styles.container}>
@@ -32,7 +33,15 @@ export const CellphoneMockup = ({ children }: CellphoneMockupProps) => {
       <div className={styles.svgContainer}>
         <div className={styles.contentContainer}>
           <div className={styles.profileContainer}>
-            <div className={styles.avatar} />
+            <div className={styles.avatar}>
+              {profilePictureUrl && (
+                <img
+                  src={profilePictureUrl}
+                  alt="Profile"
+                  className={styles.avatarImage}
+                />
+              )}
+            </div>
             <div className={clsx(styles.name, !fullName && styles.namePlaceholder)}>
               {fullName}
             </div>

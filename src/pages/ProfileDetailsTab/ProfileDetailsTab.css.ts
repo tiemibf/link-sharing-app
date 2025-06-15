@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { vars } from "../../styles/theme.css";
 
 export const profileDetailsContainer = style({
     padding: 40,
@@ -7,65 +8,41 @@ export const profileDetailsContainer = style({
     gap: 32
 });
 
-export const profilePictureContainer = style({
-    display: 'flex',
-    alignItems: 'center',
-    gap: 32,
-    background: '#FAFAFA',
-    borderRadius: 12,
-    padding: 24,
-    margin: '32px 0 0 0'
-});
-
-export const profilePictureLabel = style({
-    cursor: 'pointer',
+export const pictureUploadCard = style({
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 160,
-    height: 160,
-    background: '#F6F6FF',
-    borderRadius: 16,
-    border: '2px dashed #633CFF',
-    color: '#633CFF',
-    fontWeight: 500,
-    fontSize: 16,
-    gap: 12
-});
-
-export const profilePictureInput = style({
-    display: 'none'
-});
-
-export const profilePictureHint = style({
-    color: '#737373',
-    fontSize: 14,
-    maxWidth: 180
+    gap: 24,
+    background: vars.color.lightGray,
+    borderRadius: 12,
+    padding: 24,
+    margin: '32px 0 0 0',
+    '@media': {
+        'screen and (min-width: 768px)': {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+        }
+    }
 });
 
 export const formField = style({
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-});
-
-export const uploadIcon = style({
-    fontSize: 40,
-    marginBottom: 8
-});
-
-export const uploadText = style({
-    marginBottom: 4,
-    color: '#633CFF',
-    fontWeight: 500
+    flexDirection: 'column',
+    gap: 8,
+    '@media': {
+        'screen and (min-width: 768px)': {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+        }
+    }
 });
 
 export const inputFieldsCard = style({
     display: 'flex',
     flexDirection: 'column',
     gap: 24,
-    background: '#FAFAFA',
+    background: vars.color.lightGray,
     borderRadius: 12,
     padding: 24,
 });

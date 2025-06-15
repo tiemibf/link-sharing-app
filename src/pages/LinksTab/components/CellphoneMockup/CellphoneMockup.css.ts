@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css";
+import { vars } from "../../../../styles/theme.css";
 
 export const container = style({
     position: "relative",
@@ -35,6 +36,14 @@ export const avatar = style({
     width: "96px",
     backgroundColor: "#eee",
     marginBottom: "24px",
+});
+
+export const avatarImage = style({
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: "50%",
+    border: `4px solid ${vars.color.lightPurple}`,
 });
 
 export const name = style({
